@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="scriptRegistro.js" defer></script>
+    <title>Registro de Usuario - Tienda DecoHogar</title>
+</head>
+<body class="bg-light min-vh-100 d-flex flex-column">
+
+    <header class="bg-body-tertiary border-bottom py-3">
+        <div class="container-fluid px-4">
+            <div class="row align-items-center">
+                <div class="col-4 text-start">
+                    <a href="#" class="text-dark text-decoration-none fw-bold">HOME</a>
+                </div>
+                <div class="col-4 text-center">
+                    <h1 class="h3 m-0 fw-bold tracking-wide">Tienda DecoHogar</h1>
+                </div>
+                <div class="col-4 text-end">
+                    <a href="login.html" class="btn btn-dark text-uppercase px-3 fw-bold">INICIAR SESIÓN</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container flex-grow-1 d-flex justify-content-center align-items-center my-5">
+        <div class="card border-dark shadow-sm" style="width: 100%; max-width: 550px;">
+            <div class="card-header bg-secondary-subtle border-bottom border-dark py-2">
+                <span class="fw-bold text-lowercase fs-6 ms-2">Registro de usuario</span>
+            </div>
+            
+            <div class="card-body p-4">
+                <div id="mensajeError"></div>
+
+                <form id="formRegistro">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label fw-bold text-uppercase small">NOMBRE COMPLETO</label>
+                        <input type="text" class="form-control border-dark" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold text-uppercase small">CORREO</label>
+                        <input type="email" class="form-control border-dark" id="email" name="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="emailRepetir" class="form-label fw-bold text-uppercase small">CONFIRMAR CORREO</label>
+                        <input type="email" class="form-control border-dark" id="emailRepetir" name="emailRepetir" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contraseña" class="form-label fw-bold text-uppercase small">CONTRASEÑA</label>
+                        <input type="password" class="form-control border-dark" id="contraseña" name="contraseña" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contraseñaRepetir" class="form-label fw-bold text-uppercase small">CONFIRMAR CONTRASEÑA</label>
+                        <input type="password" class="form-control border-dark" id="contraseñaRepetir" name="contraseñaRepetir" required>
+                    </div>
+
+                    
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label class="form-label fw-bold text-uppercase small m-0">Direcciones de Envío</label>
+                            <button type="button" id="btnAgregarDireccion" class="btn btn-outline-dark btn-sm fw-bold text-uppercase">
+                                + Agregar Dirección
+                            </button>
+                        </div>
+                        
+                        
+                        <div id="contenedorDirecciones" class="d-flex flex-column gap-3"></div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-uppercase small">Estilos de Preferencia</label>
+                        <div class="border border-dark p-3 bg-white">
+                            <div class="row">
+                                <div class="col-6 d-flex flex-column gap-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input border-dark" type="checkbox" id="minimalista" name="estilo" value="minimalista">
+                                        <label class="form-check-label fw-semibold text-uppercase small" for="minimalista">Minimalista</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input border-dark" type="checkbox" id="nordico" name="estilo" value="nordico">
+                                        <label class="form-check-label fw-semibold text-uppercase small" for="nordico">Nordico</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input border-dark" type="checkbox" id="vintage" name="estilo" value="vintage">
+                                        <label class="form-check-label fw-semibold text-uppercase small" for="vintage">Vintage</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input border-dark" type="checkbox" id="rustico" name="estilo" value="rustico">
+                                        <label class="form-check-label fw-semibold text-uppercase small" for="rustico">Rustico</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input border-dark" type="checkbox" id="moderno" name="estilo" value="moderno">
+                                        <label class="form-check-label fw-semibold text-uppercase small" for="moderno">Moderno</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button type="submit" class="btn btn-outline-dark px-4 py-2 border-2 text-uppercase fw-bold">REGISTRAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <template id="templateDireccion">
+        <div class="direccion-item border border-dark p-3 bg-white position-relative">
+            <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom border-secondary">
+                <span class="fw-bold small text-uppercase">Dirección</span>
+                <button type="button" class="btn btn-danger btn-sm py-0 px-2 btn-eliminar-direccion" title="Eliminar dirección">
+                </button>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label fw-bold text-uppercase extra-small">Alias</label>
+                <input type="text" class="form-control form-control-sm border-dark" name="alias[]" maxlength="20" placeholder="Ej. Casa, Trabajo">
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label fw-bold text-uppercase extra-small">Dirección *</label>
+                <input type="text" class="form-control form-control-sm border-dark" name="direccion[]" minlength="10" required placeholder="Ej. Av. Siempre Viva 742">
+            </div>
+
+            <div>
+                <label class="form-label fw-bold text-uppercase extra-small">Comuna *</label>
+                <select class="form-select form-select-sm border-dark" name="comuna[]" required>
+                    <option value="" disabled selected>Seleccione comuna</option>
+                    <option value="santiago">Santiago</option>
+                    <option value="providencia">Providencia</option>
+                    <option value="las_condes">Las Condes</option>
+                    <option value="ñuñoa">Ñuñoa</option>
+                    <option value="maipu">Maipú</option>
+                </select>
+            </div>
+        </div>
+    </template>
+
+                                
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
