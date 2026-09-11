@@ -1,0 +1,15 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tracking-wide {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.extra-small {
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+}
+

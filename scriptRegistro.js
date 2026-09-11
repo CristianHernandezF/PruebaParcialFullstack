@@ -12,7 +12,6 @@ function agregarDireccion() {
     const itemDireccion = clone.querySelector(".direccion-item");
     const btnEliminar = clone.querySelector(".btn-eliminar-direccion");
 
-    // Evento para eliminar la dirección correspondiente
     btnEliminar.addEventListener("click", () => {
       const tarjetasActuales = contenedorDirecciones.querySelectorAll(".direccion-item");
       if (tarjetasActuales.length > 1) {
@@ -29,7 +28,6 @@ function agregarDireccion() {
     agregarDireccion();
   }
 
-  // Evento al pulsar el botón "+ AGREGAR DIRECCIÓN"
   if (btnAgregarDireccion) {
     btnAgregarDireccion.addEventListener("click", agregarDireccion);
   }
@@ -45,7 +43,6 @@ function ValidacionesRegistro() {
     const contraseñaRepetir = document.getElementById("contraseñaRepetir").value;
     const estilos = document.querySelectorAll('input[type="checkbox"]:checked');
 
-    // Validacion nombre
     const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     if(nombre == ""){
         errores.push("El nombre no puede estar vacio, ES OBLIGATORIO ");
@@ -56,7 +53,6 @@ function ValidacionesRegistro() {
     } 
 
     
-    // Validar correo
     const esDuoc = /^[^\s@]+@duoc\.cl$/i;
     if(correo == ""){
         errores.push("El correo no puede estar vacio, ES OBLIGATORIO ");
@@ -71,7 +67,6 @@ function ValidacionesRegistro() {
         errores.push("Los correos electrónicos no coinciden.");
     }
 
-    // Validar contraseña
     if (contraseña == "") {
         errores.push("La contraseña no puede estar vacía, ES OBLIGATORIA.");
     } else if (contraseña.length < 10) {
@@ -87,10 +82,9 @@ function ValidacionesRegistro() {
     if (contraseña !== contraseñaRepetir) {
         errores.push("Las contraseñas no coinciden.");
     }
-
   
     if (estilos.length === 0) {
-        errores.push("selecciona al menos un género favorito");
+        errores.push("Debes seleccionar al menos un estilo de preferencia.");
     }
 
     const tarjetasDireccion = contenedorDirecciones.querySelectorAll(".direccion-item");
@@ -122,7 +116,6 @@ function ValidacionesRegistro() {
           errores.push(`Dirección #${index + 1}: Debes seleccionar una comuna.`);
         }
 
-        // Si la dirección individual es válida, la guardamos en un arreglo temporal
         if (direccionVal.length >= 10 && comunaVal !== "" && aliasVal.length <= 20) {
           listaDirecciones.push({
             alias: aliasVal || "Sin alias",
