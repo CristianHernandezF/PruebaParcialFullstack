@@ -53,7 +53,7 @@ function ValidacionesRegistro() {
         errores.push("El nombre es muy largo, El maximo es de 100 caracteres");
     } else if (!soloLetras.test(nombre)){
         errores.push("El nombre solo debe contener letras");
-    }
+    } 
 
     
     // Validar correo
@@ -61,10 +61,13 @@ function ValidacionesRegistro() {
     if(correo == ""){
         errores.push("El correo no puede estar vacio, ES OBLIGATORIO ");
     } else if (!esDuoc.test(correo)){ 
-        errores.push("El correo debe terminar obligatoriamente en @duoc.cl.");
+        errores.push("El correo debe terminar obligatoriamente en @duoc.cl");
     } else if (correo.length > 60) { 
         errores.push("El correo no puede tener más de 60 caracteres.");
-    } 
+    } else if (usuariosGuardados.some(u => u.correo.toLowerCase() === correo.toLowerCase())) {
+        // Validacion de UNICIDAD en el sistema
+        errores.push("El correo electronico ya se encuentra registrado en el sistema.");
+    }
     if (correo !== correoRepetir) {
         errores.push("Los correos electrónicos no coinciden.");
     }
