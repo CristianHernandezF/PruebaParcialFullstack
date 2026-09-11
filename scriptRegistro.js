@@ -3,7 +3,7 @@ const mensajeError = document.getElementById("mensajeError");
 const contenedorDirecciones = document.getElementById("contenedorDirecciones");
 const btnAgregarDireccion = document.getElementById("btnAgregarDireccion");
 const templateDireccion = document.getElementById("templateDireccion");
-
+const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosGuardados")) || [];
 
 function agregarDireccion() {
     if (!templateDireccion || !contenedorDirecciones) return;
@@ -65,7 +65,6 @@ function ValidacionesRegistro() {
     } else if (correo.length > 60) { 
         errores.push("El correo no puede tener más de 60 caracteres.");
     } else if (usuariosGuardados.some(u => u.correo.toLowerCase() === correo.toLowerCase())) {
-        // Validacion de UNICIDAD en el sistema
         errores.push("El correo electronico ya se encuentra registrado en el sistema.");
     }
     if (correo !== correoRepetir) {
@@ -109,7 +108,6 @@ function ValidacionesRegistro() {
         const direccionVal = inputDireccion.value.trim();
         const comunaVal = selectComuna.value;
 
-        // Validaciones por cada dirección
         if (aliasVal.length > 20) {
           errores.push(`Dirección #${index + 1}: El alias no puede superar los 20 caracteres.`);
         }
@@ -156,7 +154,8 @@ function ValidacionesRegistro() {
             direcciones: listaDirecciones
         };
 
-        localStorage.setItem("usuarioRegistrado", JSON.stringify(nuevoUsuario));
+        usuariosGuardados.push(nuevoUsuario);
+        localStorage.setItem("usuariosGuardados", JSON.stringify(usuariosGuardados));
 
         mensajeError.innerHTML = "<p style='color: green;'><strong>¡Registro exitoso! Redirigiendo al Login...</strong></p>";
         formRegistro.reset();
