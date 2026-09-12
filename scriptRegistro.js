@@ -69,7 +69,7 @@ function ValidacionesRegistro() {
 
     if (contraseña == "") {
         errores.push("La contraseña no puede estar vacía, ES OBLIGATORIA.");
-    } else if (contraseña.length < 10) {
+    } else if (contraseña.length <= 10) {
         errores.push("La contraseña debe tener mínimo 10 caracteres.");
     } else if ((contraseña.match(/[A-Z]/g) || []).length < 1) {
         errores.push("La contraseña debe tener al menos 1 letras mayúsculas.");
